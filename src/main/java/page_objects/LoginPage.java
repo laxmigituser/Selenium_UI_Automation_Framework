@@ -11,25 +11,27 @@ public class LoginPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(css = "input#userEmail")
-    public WebElement userEmail;
-    @FindBy(css = "input#userPassword")
+    @FindBy(xpath = "//input[@name = 'username']")
+    public WebElement userName;
+    @FindBy(xpath = "//input[@name = 'password']")
     public WebElement userPassword;
-    @FindBy(css = "input#login")
+    @FindBy(xpath = "//div[@role='alert']//p[text()='Invalid credentials']")
+    public WebElement invalidCredensErrorText;
+    @FindBy(xpath = "//button[@type = 'submit']")
     public WebElement loginButton;
-    @FindBy(css = "[class*='flyInOut']")
-    public WebElement errorMessage;
 
     public void navigateTLoginPage(){
-        driver.get("https://rahulshettyacademy.com/client");
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        waitForPageLoad();
     }
 
     public void loginToApplication(String username, String password){
-        type(userEmail, username);
+        type(userName, username);
         type(userPassword, password);
         click(loginButton);
+        waitForPageLoad();
     }
-    public String getErrorMessage(){
-        return getText(errorMessage);
+    public boolean isErrorVisible(){
+       return elementVisible(invalidCredensErrorText);
     }
 }

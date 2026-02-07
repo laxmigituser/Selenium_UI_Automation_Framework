@@ -7,7 +7,7 @@
     <test name="Regression Tests" >
         <classes>
 
-            <class name="ui_tests.ECommerceEndtoEndTest"/>
+            <class name="ui_tests.UserLoginLogOutTest"/>
         </classes>
     </test>
 </suite>
